@@ -10,6 +10,10 @@ public class QuizBankId implements ValueObject<QuizBankId> {
 
     private final String id;
 
+    public QuizBankId() {
+        id = generateNextId();
+    }
+
     @Override
     public boolean sameValueAs(QuizBankId other) {
         return equals(other);

@@ -1,10 +1,11 @@
 package platform.quizbank.domain;
 
+import java.util.UUID;
+
 public interface ValueObject<T> {
     boolean sameValueAs(T other);
 
     default String generateNextId() {
-        //TODO Generate ID
-        return "";
+        return UUID.randomUUID().toString();
     }
 }

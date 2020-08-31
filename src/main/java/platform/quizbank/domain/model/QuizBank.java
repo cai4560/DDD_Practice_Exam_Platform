@@ -17,8 +17,8 @@ public class QuizBank implements Entity<QuizBank> {
 
     private final LocalDateTime updatedTime;
 
-    private QuizBank(QuizBankId id, Set<Quiz> quizSet) {
-        this.id = id;
+    private QuizBank(Set<Quiz> quizSet) {
+        this.id = new QuizBankId();
         this.quizSet = quizSet;
         this.createdTime = LocalDateTime.now();
         this.updatedTime = LocalDateTime.now();
@@ -29,7 +29,7 @@ public class QuizBank implements Entity<QuizBank> {
         return equals(other);
     }
 
-    public static QuizBank createQuizBank(QuizBankId id, Set<Quiz> quizSet) {
-        return new QuizBank(id, quizSet);
+    public static QuizBank createQuizBank(Set<Quiz> quizSet) {
+        return new QuizBank(quizSet);
     }
 }

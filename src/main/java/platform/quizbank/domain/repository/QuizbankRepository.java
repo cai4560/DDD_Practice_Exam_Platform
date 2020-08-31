@@ -8,8 +8,6 @@ import java.util.Optional;
 
 public interface QuizbankRepository {
 
-    void updateVersion(String version);
-
     List<Quiz> findAllQuiz();
 
     Optional<Quiz> findQuizById(QuizId id);
@@ -18,5 +16,5 @@ public interface QuizbankRepository {
 
     void updateQuiz(Quiz quiz);
 
-    void deleteQuiz(Quiz quiz);
+    void deleteQuiz(QuizId id);
 }
