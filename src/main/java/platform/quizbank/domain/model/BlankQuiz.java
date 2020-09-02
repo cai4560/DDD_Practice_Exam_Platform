@@ -2,16 +2,39 @@ package platform.quizbank.domain.model;
 
 import lombok.Getter;
 import platform.quizbank.domain.Entity;
-import platform.quizbank.domain.service.UpdateQuizRequest;
+import platform.quizbank.representation.request.UpdateBlankQuizRequest;
+
+import java.time.LocalDateTime;
 
 @Getter
-public class BlankQuiz extends Quiz implements Entity<BlankQuiz> {
+public class BlankQuiz implements Entity<BlankQuiz> {
 
-    private final String standardAnswer;
+    private final BlankQuizId id;
 
-    public BlankQuiz(String standardAnswer) {
+    private String name;
+
+    private Integer score;
+
+    private String standardAnswer;
+
+    private final LocalDateTime createdTime;
+
+    private LocalDateTime updatedTime;
+
+    private Boolean isDeleted;
+
+    public BlankQuiz(String name, Integer score, String standardAnswer) {
+        this.id = new BlankQuizId();
+        this.name = name;
+        this.score = score;
         this.standardAnswer = standardAnswer;
-        this.quizType = QuizType.BLANK_QUIZ;
+        this.createdTime = LocalDateTime.now();
+        this.updatedTime = LocalDateTime.now();
+        isDeleted = false;
+    }
+
+    public static BlankQuiz create(String name, Integer score, String standardAnswer) {
+        return new BlankQuiz(name, score, standardAnswer);
     }
 
     @Override
@@ -19,9 +42,15 @@ public class BlankQuiz extends Quiz implements Entity<BlankQuiz> {
         return this.id.equals(other.id);
     }
 
-    @Override
-    protected void updateQuiz(UpdateQuizRequest request) {
+    public void update(UpdateBlankQuizRequest request) {
         this.name = request.getName();
         this.score = request.getScore();
+        this.standardAnswer = request.getStandardAnswer();
+        this.updatedTime = LocalDateTime.now();
+    }
+
+    public void delete() {
+        this.isDeleted = true;
+        this.updatedTime = LocalDateTime.now();
     }
 }

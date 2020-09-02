@@ -11,25 +11,28 @@ public class QuizBank implements Entity<QuizBank> {
 
     private final QuizBankId id;
 
-    private final Set<Quiz> quizSet;
+    private final String name;
+
+    private final Set<BlankQuiz> quizSet;
 
     private final LocalDateTime createdTime;
 
     private final LocalDateTime updatedTime;
 
-    private QuizBank(Set<Quiz> quizSet) {
+    private QuizBank(String name) {
         this.id = new QuizBankId();
-        this.quizSet = quizSet;
+        this.name = name;
+        this.quizSet = Set.of();
         this.createdTime = LocalDateTime.now();
         this.updatedTime = LocalDateTime.now();
+    }
+
+    public static QuizBank create(String name) {
+        return new QuizBank(name);
     }
 
     @Override
     public boolean sameIdentityAs(QuizBank other) {
         return equals(other);
-    }
-
-    public static QuizBank createQuizBank(Set<Quiz> quizSet) {
-        return new QuizBank(quizSet);
     }
 }
